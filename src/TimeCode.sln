@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeCode", "TimeCode\TimeCode.csproj", "{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeCodeTests", "TimeCodeTests\TimeCodeTests.csproj", "{541195D7-D943-40AB-8247-5635610D5A13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541195D7-D943-40AB-8247-5635610D5A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541195D7-D943-40AB-8247-5635610D5A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541195D7-D943-40AB-8247-5635610D5A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541195D7-D943-40AB-8247-5635610D5A13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14FD06CA-CD1F-4168-9C6D-540F51DC8A39}
+	EndGlobalSection
+EndGlobal
