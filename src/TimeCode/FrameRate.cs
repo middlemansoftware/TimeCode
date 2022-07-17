@@ -104,7 +104,7 @@ namespace TimeCode
 
         /// <summary>
         /// <para>The base frame rate, not considering the <see cref="FrameRateDivisor"/>.</para>
-        /// <para>For example, 59.94 fps is defined as 60 frames per second, with a 1.001 frame rate divisor.</para>
+        /// <para>For example, 59.94 fps (a non-integer frame rate) is defined as 60 frames per second, with a 1.001 frame rate divisor.</para>
         /// </summary>
         public int FramesPerSecond
         {
@@ -112,7 +112,9 @@ namespace TimeCode
         }
 
         /// <summary>
-        /// TODO doc
+        /// <para>The number to divide <see cref="FramesPerSecond"/> by, to produce the precise frames rate.</para>
+        /// <para>For integer frame rates, the divisor value is 1.</para>
+        /// <para>For non-integer frame rates, the divisor value is 1.001.</para>
         /// </summary>
         public double FrameRateDivisor
         {
@@ -133,7 +135,6 @@ namespace TimeCode
         public int MaximumFrames
         {
             get { return maximumFrames; }
-            //set { maximumFrames = value; }
         }
 
         #endregion Public Properties
