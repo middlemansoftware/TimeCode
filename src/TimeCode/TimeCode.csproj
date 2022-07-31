@@ -7,7 +7,7 @@
     <ProjectGuid>{90FB0084-8F1A-407E-8E5F-55D6E83A3E2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TimeCode</RootNamespace>
+    <RootNamespace>Middleman</RootNamespace>
     <AssemblyName>TimeCode</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

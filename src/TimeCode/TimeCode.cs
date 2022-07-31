@@ -6,7 +6,7 @@
 // <author>James Heliker</author>
 using System;
 
-namespace TimeCode
+namespace Middleman
 {
     /// <summary>
     /// Represents a SMPTE ST 12 time code.
@@ -60,19 +60,165 @@ namespace TimeCode
             set { frameCount = value; }
         }
 
+        public FrameRate FrameRate
+        {
+            get { return frameRate; }
+        }
+
         #endregion Public Properties
 
+        #region Operator Overloads
+
+
+        /// <summary>
+        /// Adds two specified TimeCode instances.
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>A TimeCode whose value is the sum of the values of tc1 and tc2.</returns>
         public static TimeCode operator +(TimeCode tc1, TimeCode tc2)
         {
             bool exceededMaximum = false;
             return tc1.Add(tc2, out exceededMaximum);
         }
 
+        /// <summary>
+        /// Subtracts a specified TimeCode from another specified TimeCode.
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>A TimeCode whose value is the result of the value of tc1 minus the value of tc2.</returns>
         public static TimeCode operator -(TimeCode tc1, TimeCode tc2)
         {
             bool subceededMinimum = false;
             return tc1.Subtract(tc2, out subceededMinimum);
         }
+
+        /// <summary>
+        /// <para>Indicates whether a specified TimeCode is less than another specified TimeCode.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns> True if the value of tc1 is less than the value of tc2; otherwise, false.</returns>
+        public static bool operator <(TimeCode tc1, TimeCode tc2)
+        {
+            if (tc1.FrameCount < tc2.FrameCount)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// <para>Indicates whether a specified TimeCode is greater than another specified TimeCode.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>true if the value of tc1 is greater than the value of tc2; otherwise, false.</returns>
+        public static bool operator >(TimeCode tc1, TimeCode tc2)
+        {
+            if (tc1.FrameCount > tc2.FrameCount)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// <para>Indicates whether two TimeCode instances are equal.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>true if the values of tc1 and tc2 are equal; otherwise, false.</returns>
+        public static bool operator ==(TimeCode tc1, TimeCode tc2)
+        {
+            return tc1.FrameCount == tc2.FrameCount;
+        }
+
+        /// <summary>
+        /// <para>Indicates whether two TimeCode instances are not equal.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>true if the values of tc1 and tc2 are not equal; otherwise, false.</returns>
+        public static bool operator !=(TimeCode tc1, TimeCode tc2)
+        {
+            return !(tc1.FrameCount == tc2.FrameCount);
+        }
+
+        /// <summary>
+        /// <para>Indicates whether a specified TimeCode is less than or equal to another specified TimeCode.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>True if the value of tc1 is less than or equal to the value of tc2; otherwise, false.</returns>
+        public static bool operator <=(TimeCode tc1, TimeCode tc2)
+        {
+            if ((tc1.FrameCount < tc2.FrameCount) || (tc1 == tc2))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// <para>Indicates whether a specified TimeCode is greater than or equal to another specified TimeCode.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>True if the value of tc1 is greater than or equal to the value of tc2; otherwise, false.</returns>
+        public static bool operator >=(TimeCode tc1, TimeCode tc2)
+        {
+            if ((tc1.FrameCount > tc2.FrameCount) || (tc1 == tc2))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// <para>Compares two TimeCode values and returns an integer that indicates their relationship.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>Value Condition -1 tc1 is less than tc2, 0 tc1 is equal to tc2, 1 tc1 is greater than tc2.</returns>
+        public static int Compare(TimeCode tc1, TimeCode tc2)
+        {
+            if (tc1 < tc2)
+            {
+                return -1;
+            }
+
+            if (tc1 == tc2)
+            {
+                return 0;
+            }
+
+            return 1;
+        }
+
+        /// <summary>
+        /// <para>Returns a value indicating whether two specified instances of TimeCode are equal.</para>
+        /// </summary>
+        /// <param name="tc1">The first TimeCode.</param>
+        /// <param name="tc2">The second TimeCode.</param>
+        /// <returns>true if the values of tc1 and tc2 are equal; otherwise, false.</returns>
+        public static bool Equals(TimeCode tc1, TimeCode tc2)
+        {
+            if (tc1 == tc2)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
 
         public TimeCode Add(TimeCode timeCode, out bool exceededMaximum)
         {
@@ -89,6 +235,12 @@ namespace TimeCode
             return new TimeCode(additionFrameCount, timeCode.frameRate);
         }
 
+        public TimeCode Add(TimeCode timeCode)
+        {
+            bool exceededMaximum = false;
+            return Add(timeCode, out exceededMaximum);
+        }
+
         public TimeCode Subtract(TimeCode timeCode, out bool subceededMinimum)
         {
             //Check if the operation would subceed the minimum frames able to be represented (zero)
@@ -102,6 +254,12 @@ namespace TimeCode
 
             subceededMinimum = operationSubceeds;
             return new TimeCode(subtractionFrameCount, timeCode.frameRate);
+        }
+
+        public TimeCode Subtract(TimeCode timeCode)
+        {
+            bool subceededMinimum = false;
+            return Subtract(timeCode, out subceededMinimum);
         }
 
         public static TimeCode FromString(string timeCode, FrameRate frameRate)

@@ -5,7 +5,7 @@
 // </copyright>
 // <author>James Heliker</author>
 
-namespace TimeCode
+namespace Middleman
 {
     public enum FrameRates
     {

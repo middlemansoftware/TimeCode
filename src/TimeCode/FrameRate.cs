@@ -6,7 +6,7 @@
 // <author>James Heliker</author>
 using System;
 
-namespace TimeCode
+namespace Middleman
 {
     /// <summary>
     /// Represents a frame rate, to support SMPTE ST 12 time code.
