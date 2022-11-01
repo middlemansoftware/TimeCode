@@ -5,9 +5,10 @@
 // </copyright>
 // <author>James Heliker</author>
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Middleman;
 using System;
 
-namespace TimeCode.Tests
+namespace TimeCodeTests
 {
     [TestClass()]
     public class TimeCodeTests
@@ -31,7 +32,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_23_976_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_23_976_NDF);
 
-            Assert.AreEqual("00:00:01:12", tc2.ToString());
+            Assert.AreEqual("00:00:01:12/FPS_23_976_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -40,7 +41,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_23_976_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_23_976_NDF);
 
-            Assert.AreEqual("23:59:59:23", tc2.ToString());
+            Assert.AreEqual("23:59:59:23/FPS_23_976_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -49,7 +50,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_23_976_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_23_976_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_23_976_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -58,7 +59,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_23_976_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_23_976_NDF);
 
-            Assert.AreEqual("00:10:00:00", tc2.ToString());
+            Assert.AreEqual("00:10:00:00/FPS_23_976_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -67,7 +68,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_23_976_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_23_976_NDF);
 
-            Assert.AreEqual("23:59:00:00", tc2.ToString());
+            Assert.AreEqual("23:59:00:00/FPS_23_976_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -100,7 +101,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_24_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_24_NDF);
 
-            Assert.AreEqual("00:00:01:12", tc2.ToString());
+            Assert.AreEqual("00:00:01:12/FPS_24_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -109,7 +110,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_24_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_24_NDF);
 
-            Assert.AreEqual("23:59:59:23", tc2.ToString());
+            Assert.AreEqual("23:59:59:23/FPS_24_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -118,7 +119,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_24_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_24_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_24_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -127,7 +128,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_24_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_24_NDF);
 
-            Assert.AreEqual("00:10:00:00", tc2.ToString());
+            Assert.AreEqual("00:10:00:00/FPS_24_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -136,7 +137,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_24_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_24_NDF);
 
-            Assert.AreEqual("23:59:00:00", tc2.ToString());
+            Assert.AreEqual("23:59:00:00/FPS_24_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -169,7 +170,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_25_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_25_NDF);
 
-            Assert.AreEqual("00:00:01:10", tc2.ToString());
+            Assert.AreEqual("00:00:01:10/FPS_25_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -178,7 +179,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_25_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_25_NDF);
 
-            Assert.AreEqual("23:59:59:24", tc2.ToString());
+            Assert.AreEqual("23:59:59:24/FPS_25_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -187,7 +188,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_25_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_25_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_25_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -196,7 +197,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_25_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_25_NDF);
 
-            Assert.AreEqual("00:09:36:00", tc2.ToString());
+            Assert.AreEqual("00:09:36:00/FPS_25_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -205,7 +206,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_25_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_25_NDF);
 
-            Assert.AreEqual("23:01:26:10", tc2.ToString());
+            Assert.AreEqual("23:01:26:10/FPS_25_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -238,7 +239,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_29_97_DF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_29_97_DF);
 
-            Assert.AreEqual("00:00:01;00", tc2.ToString());
+            Assert.AreEqual("00:00:01;00/FPS_29_97_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -247,7 +248,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_DF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_29_97_DF);
 
-            Assert.AreEqual("23:59:59;29", tc2.ToString());
+            Assert.AreEqual("23:59:59;29/FPS_29_97_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -256,7 +257,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_DF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_29_97_DF);
 
-            Assert.AreEqual("00:00:59;29", tc2.ToString());
+            Assert.AreEqual("00:00:59;29/FPS_29_97_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -265,7 +266,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_DF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_29_97_DF);
 
-            Assert.AreEqual("00:08:00;16", tc2.ToString());
+            Assert.AreEqual("00:08:00;16/FPS_29_97_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -274,7 +275,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_DF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_29_97_DF);
 
-            Assert.AreEqual("19:12:21;04", tc2.ToString());
+            Assert.AreEqual("19:12:21;04/FPS_29_97_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -307,7 +308,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_29_97_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_29_97_NDF);
 
-            Assert.AreEqual("00:00:01:00", tc2.ToString());
+            Assert.AreEqual("00:00:01:00/FPS_29_97_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -316,7 +317,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_29_97_NDF);
 
-            Assert.AreEqual("23:59:59:29", tc2.ToString());
+            Assert.AreEqual("23:59:59:29/FPS_29_97_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -325,7 +326,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_29_97_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_29_97_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -334,7 +335,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_29_97_NDF);
 
-            Assert.AreEqual("00:08:00:00", tc2.ToString());
+            Assert.AreEqual("00:08:00:00/FPS_29_97_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -343,7 +344,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_29_97_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_29_97_NDF);
 
-            Assert.AreEqual("19:11:12:00", tc2.ToString());
+            Assert.AreEqual("19:11:12:00/FPS_29_97_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -376,7 +377,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_30_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_30_NDF);
 
-            Assert.AreEqual("00:00:01:00", tc2.ToString());
+            Assert.AreEqual("00:00:01:00/FPS_30_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -385,7 +386,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_30_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_30_NDF);
 
-            Assert.AreEqual("23:59:59:29", tc2.ToString());
+            Assert.AreEqual("23:59:59:29/FPS_30_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -394,7 +395,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_30_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_30_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_30_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -403,7 +404,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_30_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_30_NDF);
 
-            Assert.AreEqual("00:08:00:00", tc2.ToString());
+            Assert.AreEqual("00:08:00:00/FPS_30_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -412,7 +413,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_30_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_30_NDF);
 
-            Assert.AreEqual("19:11:12:00", tc2.ToString());
+            Assert.AreEqual("19:11:12:00/FPS_30_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -445,7 +446,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_50_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_50_NDF);
 
-            Assert.AreEqual("00:00:00:10", tc2.ToString());
+            Assert.AreEqual("00:00:00:10/FPS_50_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -454,7 +455,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_50_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_50_NDF);
 
-            Assert.AreEqual("23:59:59:49", tc2.ToString());
+            Assert.AreEqual("23:59:59:49/FPS_50_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -463,7 +464,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_50_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_50_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_50_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -472,7 +473,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_50_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_50_NDF);
 
-            Assert.AreEqual("00:04:48:00", tc2.ToString());
+            Assert.AreEqual("00:04:48:00/FPS_50_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -481,7 +482,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_50_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_50_NDF);
 
-            Assert.AreEqual("11:30:43:10", tc2.ToString());
+            Assert.AreEqual("11:30:43:10/FPS_50_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -514,7 +515,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_59_94_DF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_59_94_DF);
 
-            Assert.AreEqual("00:00:00;00", tc2.ToString());
+            Assert.AreEqual("00:00:00;00/FPS_59_94_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -523,7 +524,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_DF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_59_94_DF);
 
-            Assert.AreEqual("23:59:59;59", tc2.ToString());
+            Assert.AreEqual("23:59:59;59/FPS_59_94_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -532,7 +533,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_DF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_59_94_DF);
 
-            Assert.AreEqual("00:00:59;57", tc2.ToString());
+            Assert.AreEqual("00:00:59;57/FPS_59_94_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -541,7 +542,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_DF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_59_94_DF);
 
-            Assert.AreEqual("00:04:00;16", tc2.ToString());
+            Assert.AreEqual("00:04:00;16/FPS_59_94_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -550,7 +551,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_DF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_59_94_DF);
 
-            Assert.AreEqual("09:36:10;36", tc2.ToString());
+            Assert.AreEqual("09:36:10;36/FPS_59_94_DF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -583,7 +584,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_59_94_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_59_94_NDF);
 
-            Assert.AreEqual("00:00:00:00", tc2.ToString());
+            Assert.AreEqual("00:00:00:00/FPS_59_94_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -592,7 +593,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_59_94_NDF);
 
-            Assert.AreEqual("23:59:59:59", tc2.ToString());
+            Assert.AreEqual("23:59:59:59/FPS_59_94_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -601,7 +602,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_59_94_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_59_94_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -610,7 +611,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_59_94_NDF);
 
-            Assert.AreEqual("00:04:00:00", tc2.ToString());
+            Assert.AreEqual("00:04:00:00/FPS_59_94_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -619,7 +620,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_59_94_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_59_94_NDF);
 
-            Assert.AreEqual("09:35:36:00", tc2.ToString());
+            Assert.AreEqual("09:35:36:00/FPS_59_94_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -652,7 +653,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(23, 59, 59, 0, FPS_60_NDF);
             TimeCode tc2 = tc1 + new TimeCode(60, FPS_60_NDF);
 
-            Assert.AreEqual("00:00:00:00", tc2.ToString());
+            Assert.AreEqual("00:00:00:00/FPS_60_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -661,7 +662,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_60_NDF);
             TimeCode tc2 = tc1 - new TimeCode(1, FPS_60_NDF);
 
-            Assert.AreEqual("23:59:59:59", tc2.ToString());
+            Assert.AreEqual("23:59:59:59/FPS_60_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -670,7 +671,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_60_NDF);
             TimeCode tc2 = tc1 + new TimeCode(0, 1, 0, 1, FPS_60_NDF);
 
-            Assert.AreEqual("00:01:00:01", tc2.ToString());
+            Assert.AreEqual("00:01:00:01/FPS_60_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -679,7 +680,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_60_NDF);
             TimeCode tc2 = tc1 + new TimeCode(14400, FPS_60_NDF);
 
-            Assert.AreEqual("00:04:00:00", tc2.ToString());
+            Assert.AreEqual("00:04:00:00/FPS_60_NDF", tc2.ToString());
         }
 
         [TestMethod()]
@@ -688,7 +689,7 @@ namespace TimeCode.Tests
             TimeCode tc1 = new TimeCode(0, 0, 0, 0, FPS_60_NDF);
             TimeCode tc2 = tc1 + new TimeCode(2072160, FPS_60_NDF);
 
-            Assert.AreEqual("09:35:36:00", tc2.ToString());
+            Assert.AreEqual("09:35:36:00/FPS_60_NDF", tc2.ToString());
         }
 
         [TestMethod()]

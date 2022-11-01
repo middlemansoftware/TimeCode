@@ -139,16 +139,120 @@ namespace Middleman
 
         #endregion Public Properties
 
-        public override string ToString()
+        public static FrameRate Parse(string frameRateString)
         {
-            //Write 24/1.001 as 23.976 (3 digits), all others use two digits of precision
-            if (framesPerSecond == 24 && frameRateDivisor == 1.001)
+            FrameRate toReturn = null;
+
+            FrameRates parseResult;
+            if (Enum.TryParse<FrameRates>(frameRateString, out parseResult))
             {
-                return String.Format("{0:00.000} fps", framesPerSecond / frameRateDivisor);
+                return new FrameRate(parseResult);
             }
             else
             {
-                return String.Format("{0:00.00} fps", framesPerSecond / frameRateDivisor);
+                throw new ArgumentException("The provided string cannot be parsed as a frame rate.");
+            }
+        }
+
+        public static bool TryParse(string frameRateString, out FrameRate frameRate)
+        {
+            bool toReturn = false;
+
+            try
+            {
+                frameRate = FrameRate.Parse(frameRateString);
+                toReturn = true;
+            }
+            catch (ArgumentException argEx)
+            {
+                frameRate = null;
+            }
+
+            return toReturn;
+        }
+
+        public override string ToString()
+        {
+            return ToString(false);
+        }
+
+        public string ToString(bool friendlyFormat = false)
+        {
+            if (friendlyFormat)
+            {
+                //Write 24/1.001 as 23.976 (3 digits)
+                if (framesPerSecond == 24 && frameRateDivisor == 1.001)
+                {
+                    return String.Format("{0:00.000} fps {df}", framesPerSecond / frameRateDivisor, (dropFrame ? "drop frame" : "non-drop frame"));
+                }
+                else
+                {   //otherwise if whole divisor, no digits of precision, or two digits of precision by default
+                    if (frameRateDivisor == 1)
+                    {
+                        return String.Format("{0:00} fps {df}", framesPerSecond / frameRateDivisor, (dropFrame ? "drop frame" : "non-drop frame"));
+                    }
+                    else
+                    {
+                        return String.Format("{0:00.00} fps {df}", framesPerSecond / frameRateDivisor, (dropFrame ? "drop frame" : "non-drop frame"));
+                    }
+                }
+            }
+            else
+            {
+                //Not-friendly format mirrors what is needed for the Parse method
+                //TODO - evaluate use of 30 non-drop frame as default in the below code
+                FrameRates tmpEnumVal = FrameRates.FPS_30_NDF;
+                if (framesPerSecond == 24)
+                {
+                    if (frameRateDivisor == 1.001)
+                    {
+                        tmpEnumVal = FrameRates.FPS_23_976_NDF;
+                    }
+                    else
+                    {
+                        tmpEnumVal = FrameRates.FPS_24_NDF;
+                    }
+                }
+                else if (framesPerSecond == 25 && frameRateDivisor == 1)
+                {
+                    tmpEnumVal = FrameRates.FPS_25_NDF;
+                }
+                else if (framesPerSecond == 30 && frameRateDivisor == 1.001)
+                {
+                    if (dropFrame)
+                    {
+                        tmpEnumVal = FrameRates.FPS_29_97_DF;
+                    }
+                    else
+                    {
+                        tmpEnumVal = FrameRates.FPS_29_97_NDF;
+                    }
+                }
+                else if (framesPerSecond == 30 && frameRateDivisor == 1)
+                {
+                    tmpEnumVal = FrameRates.FPS_30_NDF;
+                }
+                else if (framesPerSecond == 50 && frameRateDivisor == 1)
+                {
+                    tmpEnumVal = FrameRates.FPS_50_NDF;
+                }
+                else if (framesPerSecond == 60 && frameRateDivisor == 1.001)
+                {
+                    if (dropFrame)
+                    {
+                        tmpEnumVal = FrameRates.FPS_59_94_DF;
+                    }
+                    else
+                    {
+                        tmpEnumVal = FrameRates.FPS_59_94_NDF;
+                    }
+                }
+                else if (framesPerSecond == 60 && frameRateDivisor == 1)
+                {
+                    tmpEnumVal = FrameRates.FPS_60_NDF;
+                }
+
+                return tmpEnumVal.ToString();
             }
         }
     }

@@ -65,10 +65,57 @@ namespace Middleman
             get { return frameRate; }
         }
 
+        public int HoursSegment
+        {
+            get
+            {
+                string tc = this.ToString();
+                string hours = tc.Substring(0, 2);
+                return Convert.ToInt32(hours);
+            }
+        }
+
+        public int MinutesSegment
+        {
+            get
+            {
+                string tc = this.ToString();
+                string minutes = tc.Substring(3, 2);
+                return Convert.ToInt32(minutes);
+            }
+        }
+
+        public int SecondsSegment
+        {
+            get
+            {
+                string tc = this.ToString();
+                string seconds = tc.Substring(6, 2);
+                return Convert.ToInt32(seconds);
+            }
+        }
+
+        public int FramesSegment
+        {
+            get
+            {
+                string tc = this.ToString();
+                string frames = tc.Substring(9, 2);
+                return Convert.ToInt32(frames);
+            }
+        }
+
+        public double TotalSeconds
+        {
+            get
+            {
+                return this.ToTimeSpan().TotalSeconds;
+            }
+        }
+
         #endregion Public Properties
 
         #region Operator Overloads
-
 
         /// <summary>
         /// Adds two specified TimeCode instances.
@@ -217,8 +264,36 @@ namespace Middleman
             return false;
         }
 
-        #endregion
+        public override bool Equals(object obj)
+        {
+            if (this == (TimeCode)obj)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+        public bool Equals(TimeCode tc2)
+        {
+            if (this == tc2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        #endregion
 
         public TimeCode Add(TimeCode timeCode, out bool exceededMaximum)
         {
@@ -284,7 +359,80 @@ namespace Middleman
             return TimeSpan.FromMilliseconds(frameCount * (1000 / (frameRate.FramesPerSecond / frameRate.FrameRateDivisor)));
         }
 
+        public static TimeCode FromDateTime(DateTime dateTime, FrameRate frameRate, bool convertFromUTC = true)
+        {
+            if (dateTime.Kind == DateTimeKind.Utc && convertFromUTC)
+            {
+                return TimeCode.FromTimeSpan(dateTime.ToLocalTime().TimeOfDay, frameRate);
+            }
+            else
+            {
+                return TimeCode.FromTimeSpan(dateTime.TimeOfDay, frameRate);
+            }
+        }
+
+        public DateTime ToDateTime(int year = 1, int month = 1, int day = 1, bool convertToUTC = false)
+        {
+            TimeSpan tmp = this.ToTimeSpan();
+
+            if (convertToUTC)
+            {
+                return new DateTime(year, month, day, tmp.Hours, tmp.Minutes, tmp.Seconds, tmp.Milliseconds, DateTimeKind.Local).ToUniversalTime();
+            }
+            else
+            {
+                return new DateTime(year, month, day, tmp.Hours, tmp.Minutes, tmp.Seconds, tmp.Milliseconds, DateTimeKind.Local);
+            }
+        }
+
+        public static TimeCode Parse(string timeCodeString)
+        {
+            TimeCode toReturn = null;
+
+            string[] tmpArr = timeCodeString.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+            if (tmpArr.Length == 2)
+            {
+                FrameRate tmpFr;
+                if (FrameRate.TryParse(tmpArr[1], out tmpFr))
+                {
+                    toReturn = TimeCode.FromString(tmpArr[0], tmpFr);
+                }
+                else
+                {
+                    throw new ArgumentException("The provided string did not include frame rate information.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("The provided string cannot be parsed as a time code.");
+            }
+
+            return toReturn;
+        }
+
+        public static bool TryParse(string timeCodeString, out TimeCode timeCode)
+        {
+            bool toReturn = false;
+
+            try
+            {
+                timeCode = TimeCode.Parse(timeCodeString);
+                toReturn = true;
+            }
+            catch (ArgumentException argEx)
+            {
+                timeCode = null;
+            }
+
+            return toReturn;
+        }
+
         public override string ToString()
+        {
+            return ToString(false);
+        }
+
+        public string ToString(bool friendlyFormat = false)
         {
             int tmpFrameCount = frameCount;
 
@@ -316,7 +464,17 @@ namespace Middleman
             double seconds = Math.Floor((double)tmpFrameCount / frameRate.FramesPerSecond % 60) % 60;
             double frames = Convert.ToInt32(tmpFrameCount % frameRate.FramesPerSecond) % frameRate.FramesPerSecond;
 
-            return String.Format("{0:00}:{1:00}:{2:00}" + framesSeparator + "{3:00}", hours, minutes, seconds, frames);
+            string toReturn = String.Format("{0:00}:{1:00}:{2:00}" + framesSeparator + "{3:00}", hours, minutes, seconds, frames);
+
+            if (friendlyFormat)
+            {
+                return toReturn;
+            }
+            else
+            {
+                //Not-friendly format mirrors what is needed for the TimeCode.Parse method, including the associated frame rate string
+                return toReturn += "/" + frameRate.ToString(false);
+            }
         }
     }
 }
