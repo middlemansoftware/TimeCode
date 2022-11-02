@@ -11,6 +11,7 @@ namespace Middleman
     /// <summary>
     /// Represents a SMPTE ST 12 time code.
     /// </summary>
+    [Serializable]
     public class TimeCode
     {
         #region Private Fields
@@ -181,7 +182,17 @@ namespace Middleman
         /// <returns>true if the values of tc1 and tc2 are equal; otherwise, false.</returns>
         public static bool operator ==(TimeCode tc1, TimeCode tc2)
         {
-            return tc1.FrameCount == tc2.FrameCount;
+            Object t1 = tc1 as Object;
+            Object t2 = tc2 as Object;
+
+            if (t1 != null && t2 != null)
+            {
+                return tc1.FrameCount == tc2.FrameCount;
+            }
+            else
+            {
+                return t1 == t2;
+            }
         }
 
         /// <summary>
@@ -192,7 +203,8 @@ namespace Middleman
         /// <returns>true if the values of tc1 and tc2 are not equal; otherwise, false.</returns>
         public static bool operator !=(TimeCode tc1, TimeCode tc2)
         {
-            return !(tc1.FrameCount == tc2.FrameCount);
+            //No null check required as it is handled in == operator overload above
+            return !(tc1 == tc2);
         }
 
         /// <summary>
@@ -203,12 +215,24 @@ namespace Middleman
         /// <returns>True if the value of tc1 is less than or equal to the value of tc2; otherwise, false.</returns>
         public static bool operator <=(TimeCode tc1, TimeCode tc2)
         {
-            if ((tc1.FrameCount < tc2.FrameCount) || (tc1 == tc2))
-            {
-                return true;
-            }
+            Object t1 = tc1 as Object;
+            Object t2 = tc2 as Object;
 
-            return false;
+            if (t1 != null && t2 != null)
+            {
+                if ((tc1.FrameCount < tc2.FrameCount) || (tc1 == tc2))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -219,12 +243,24 @@ namespace Middleman
         /// <returns>True if the value of tc1 is greater than or equal to the value of tc2; otherwise, false.</returns>
         public static bool operator >=(TimeCode tc1, TimeCode tc2)
         {
-            if ((tc1.FrameCount > tc2.FrameCount) || (tc1 == tc2))
-            {
-                return true;
-            }
+            Object t1 = tc1 as Object;
+            Object t2 = tc2 as Object;
 
-            return false;
+            if (t1 != null && t2 != null)
+            {
+                if ((tc1.FrameCount > tc2.FrameCount) || (tc1 == tc2))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -429,10 +465,10 @@ namespace Middleman
 
         public override string ToString()
         {
-            return ToString(false);
+            return ToString();
         }
 
-        public string ToString(bool friendlyFormat = false)
+        public string ToString(bool friendlyFormat = true)
         {
             int tmpFrameCount = frameCount;
 

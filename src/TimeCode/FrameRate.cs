@@ -11,6 +11,7 @@ namespace Middleman
     /// <summary>
     /// Represents a frame rate, to support SMPTE ST 12 time code.
     /// </summary>
+    [Serializable]
     public class FrameRate
     {
         #region Private Fields
@@ -176,7 +177,7 @@ namespace Middleman
             return ToString(false);
         }
 
-        public string ToString(bool friendlyFormat = false)
+        public string ToString(bool friendlyFormat = true)
         {
             if (friendlyFormat)
             {
