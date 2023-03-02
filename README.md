@@ -19,7 +19,6 @@ TimeCode timeCode3 = TimeCode.FromString("23:59:59:00", frameRate);
 
 ## Calculations
 ```c
-//Define a frame rate
 FrameRate frameRate = new FrameRate(FrameRates.FPS_29_97_DF);
 
 TimeCode timeCode1 = new TimeCode(23, 59, 59, 0, frameRate);            
