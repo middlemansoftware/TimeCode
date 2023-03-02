@@ -142,8 +142,6 @@ namespace Middleman
 
         public static FrameRate Parse(string frameRateString)
         {
-            FrameRate toReturn = null;
-
             FrameRates parseResult;
             if (Enum.TryParse<FrameRates>(frameRateString, out parseResult))
             {

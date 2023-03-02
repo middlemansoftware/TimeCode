@@ -12,7 +12,7 @@ namespace Middleman
     /// Represents a SMPTE ST 12 time code.
     /// </summary>
     [Serializable]
-    public class TimeCode
+    public class TimeCode : IComparable, IComparable<TimeCode>, IEquatable<TimeCode>
     {
         #region Private Fields
 
@@ -119,7 +119,7 @@ namespace Middleman
         #region Operator Overloads
 
         /// <summary>
-        /// Adds two specified TimeCode instances.
+        /// <para>Adds two specified TimeCode instances.</para>
         /// </summary>
         /// <param name="tc1">The first TimeCode.</param>
         /// <param name="tc2">The second TimeCode.</param>
@@ -131,7 +131,7 @@ namespace Middleman
         }
 
         /// <summary>
-        /// Subtracts a specified TimeCode from another specified TimeCode.
+        /// <para>Subtracts a specified TimeCode from another specified TimeCode.</para>
         /// </summary>
         /// <param name="tc1">The first TimeCode.</param>
         /// <param name="tc2">The second TimeCode.</param>
@@ -277,6 +277,52 @@ namespace Middleman
             }
 
             if (tc1 == tc2)
+            {
+                return 0;
+            }
+
+            return 1;
+        }
+
+        /// <summary>
+        /// <para>Compares this instance to a specified object and returns an indication of their relative values.</para>
+        /// </summary>
+        /// <param name="obj">The object to compare.</param>
+        /// <exception cref="System.ArgumentException">Object value is not a TimeCode.</exception>
+        public int CompareTo(object obj)
+        {
+            if (!(obj is TimeCode))
+            {
+                throw new ArgumentException("Object is not a TimeCode.");
+            }
+
+            TimeCode tc1 = (TimeCode)obj;
+
+            if (this < tc1)
+            {
+                return -1;
+            }
+
+            if (this == tc1)
+            {
+                return 0;
+            }
+
+            return 1;
+        }
+
+        /// <summary>
+        /// <para>Compares this instance to a specified TimeCode object and returns an indication of their relative values.</para>
+        /// </summary>
+        /// <param name="other">The TimeCode object to compare to this instance.</param>
+        public int CompareTo(TimeCode other)
+        {
+            if (this < other)
+            {
+                return -1;
+            }
+
+            if (this == other)
             {
                 return 0;
             }
