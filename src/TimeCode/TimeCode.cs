@@ -348,9 +348,17 @@ namespace Middleman
 
         public override bool Equals(object obj)
         {
-            if (this == (TimeCode)obj)
+            if (obj != null)
             {
-                return true;
+                if (obj.GetType() == typeof(TimeCode) &&
+                    this == (TimeCode)obj)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
