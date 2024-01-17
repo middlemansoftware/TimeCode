@@ -4,6 +4,7 @@
 //  All rights reserved.
 // </copyright>
 // <author>James Heliker</author>
+using Newtonsoft.Json;
 using System;
 
 namespace Middleman
@@ -11,7 +12,6 @@ namespace Middleman
     /// <summary>
     /// Represents a SMPTE ST 12 time code.
     /// </summary>
-    [Serializable]
     public class TimeCode : IComparable, IComparable<TimeCode>, IEquatable<TimeCode>
     {
         #region Private Fields
@@ -45,9 +45,10 @@ namespace Middleman
             this.frameRate = frameRate;
         }
 
-        public TimeCode(int frames, FrameRate frameRate)
+        [JsonConstructor]
+        public TimeCode(int frameCount, FrameRate frameRate)
         {
-            this.frameCount = frames;
+            this.frameCount = frameCount;
             this.frameRate = frameRate;
         }
 
