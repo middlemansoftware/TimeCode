@@ -12,6 +12,7 @@ namespace Middleman
     /// <summary>
     /// Represents a SMPTE ST 12 time code.
     /// </summary>
+    [Serializable]
     public class TimeCode : IComparable, IComparable<TimeCode>, IEquatable<TimeCode>
     {
         #region Private Fields
