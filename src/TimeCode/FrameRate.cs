@@ -11,6 +11,7 @@ namespace Middleman
     /// <summary>
     /// Represents a frame rate, to support SMPTE ST 12 time code.
     /// </summary>
+    [Serializable]
     public class FrameRate
     {
         #region Private Fields
