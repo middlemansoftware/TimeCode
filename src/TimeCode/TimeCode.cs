@@ -451,25 +451,18 @@ namespace Middleman
             return TimeSpan.FromMilliseconds(frameCount * (1000 / (frameRate.FramesPerSecond / frameRate.FrameRateDivisor)));
         }
 
-        public static TimeCode FromDateTime(DateTime dateTime, FrameRate frameRate, bool convertFromUTC = true)
+        public static TimeCode FromDateTime(DateTime dateTime, FrameRate frameRate)
         {
-            if (dateTime.Kind == DateTimeKind.Utc && convertFromUTC)
-            {
-                return TimeCode.FromTimeSpan(dateTime.ToLocalTime().TimeOfDay, frameRate);
-            }
-            else
-            {
-                return TimeCode.FromTimeSpan(dateTime.TimeOfDay, frameRate);
-            }
+            return TimeCode.FromTimeSpan(dateTime.TimeOfDay, frameRate);
         }
 
-        public DateTime ToDateTime(int year = 1, int month = 1, int day = 1, bool convertToUTC = false)
+        public DateTime ToDateTime(int year = 1, int month = 1, int day = 1, bool timeCodeIsUTC = false)
         {
             TimeSpan tmp = this.ToTimeSpan();
 
-            if (convertToUTC)
+            if (timeCodeIsUTC)
             {
-                return new DateTime(year, month, day, tmp.Hours, tmp.Minutes, tmp.Seconds, tmp.Milliseconds, DateTimeKind.Local).ToUniversalTime();
+                return new DateTime(year, month, day, tmp.Hours, tmp.Minutes, tmp.Seconds, tmp.Milliseconds, DateTimeKind.Utc);
             }
             else
             {
