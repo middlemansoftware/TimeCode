@@ -4,6 +4,7 @@
 //  All rights reserved.
 // </copyright>
 // <author>James Heliker</author>
+using Newtonsoft.Json;
 using System;
 
 namespace Middleman
@@ -97,6 +98,15 @@ namespace Middleman
                 this.dropFrame = false;
                 this.maximumFrames = 5183999;
             }
+        }
+
+        [JsonConstructor]
+        public FrameRate(int framesPerSecond, double frameRateDivisor, bool dropFrame, int maximumFrames)
+        {
+            this.framesPerSecond = framesPerSecond;
+            this.frameRateDivisor = frameRateDivisor;
+            this.dropFrame = dropFrame;
+            this.maximumFrames = maximumFrames;
         }
 
         #endregion Constructors
